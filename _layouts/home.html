@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<div class="posts">
+  {% assign posts = site.posts %}
+  {% if paginator %}
+    {% assign posts = paginator.posts %}
+  {% endif %}
+  {% for post in posts %}
+    <div class="post">
+      <h2 class="post-title">
+        <a href="{{ post.url | relative_url }}">
+          {{ post.title }}
+        </a>
+      </h2>
+
+      <time datetime="{{ post.date | date_to_xmlschema }}" class="post-meta">{{ post.date | date_to_string }}</time>
+
+      <p class="post-excerpt">
+        {% if post.description %}
+          {{ post.description | strip_html }}
+        {% else %}
+          {{ post.excerpt | strip_html }}
+        {% endif %}
+      </p>
+    </div>
+  {% endfor %}
+</div>
+
+{% if paginator %}
+  <div class="pagination">
+    {% if paginator.next_page %}
+      <a class="pagination-item older" href="{{ paginator.next_page_path | relative_url }}">Older</a>
+    {% else %}
+      <span class="pagination-item older">Older</span>
+    {% endif %}
+    {% if paginator.previous_page %}
+      <a class="pagination-item newer" href="{{ paginator.previous_page_path | relative_url }}">Newer</a>
+    {% else %}
+      <span class="pagination-item newer">Newer</span>
+    {% endif %}
+  </div>
+{% endif %}

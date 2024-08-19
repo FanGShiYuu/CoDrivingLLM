@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<article>
+  <h1>{{ page.title }}</h1>
+
+  {{ content }}
+
+  {% if page.type == "years" %}
+    {% include archive-by-years.html %}
+  {% else %}
+    {% include archive-by-tagories.html %}
+  {% endif %}
+</article>

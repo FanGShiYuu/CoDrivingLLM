@@ -1,0 +1,86 @@
+---
+layout: default
+---
+
+<article class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+      {{ page.date | date_to_string }}
+    </time>
+    {%- if page.last_modified_at -%}
+      <span> ~ </span>
+      {%- assign mdate = page.last_modified_at | date_to_xmlschema -%}
+      <time datetime="{{ mdate }}" itemprop="dateModified">
+        {{ mdate | date_to_string }}
+      </time>
+    {%- endif -%}
+    {%- if page.author -%}
+      <span> • </span>
+      {% for author in page.author %}
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          {{ author }}
+        </span>
+        {%- if forloop.last == false %}, {% endif -%}
+      {% endfor %}
+    {%- endif -%}
+    {% if page.categories.size > 0 %}
+      <span> • </span>
+      <span class="post-categories-section">
+        <i class="post-categories-icon fas fa-folder"></i>
+        <ul class="post-categories">
+          {%- for category in page.categories -%}
+            <li>
+              {% assign slugified_category = category | slugify %}
+              {%- if site.categories_path -%}
+                <a class="post-category" href="{{ site.categories_path | relative_url }}#{{ slugified_category }}">{{ category }}</a>
+              {%- else -%}
+                <span class="post-category">{{ category }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </span>
+    {% endif %}
+    {% if page.tags.size > 0 %}
+      <span> • </span>
+      <span class="post-tags-section">
+        <i class="post-tags-icon fas fa-tag"></i>
+        <ul class="post-tags">
+          {%- for tag in page.tags -%}
+            <li>
+              {% assign slugified_tag = tag | slugify %}
+              {%- if site.tags_path -%}
+                <a class="post-tag" href="{{ site.tags_path | relative_url }}#{{ slugified_tag }}">{{ slugified_tag }}</a>
+              {%- else -%}
+                <span class="post-tag">{{ slugified_tag }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </span>
+    {% endif %}
+  </div>
+
+  {{ content }}
+
+  {% if jekyll.environment == "production" and site.disqus and page.comments != false %}
+    {% include disqus.html %}
+  {% endif %}
+</article>
+
+{% if site.related_posts != empty %}
+  <aside class="related">
+    <h2 class="related-title">Related posts</h2>
+    <ul class="related-posts">
+      {% for post in site.related_posts limit:3 %}
+        <li>
+          <a href="{{ post.url | relative_url }}">
+            {{ post.title }}
+          </a>
+          <small><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time></small>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+{% endif %}

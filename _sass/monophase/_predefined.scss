@@ -1,0 +1,59 @@
+// Some predefined classes
+
+/**
+ * Message -- Show different levels of alert messages to users.
+ */
+
+.message-info,
+.message-warning,
+.message-danger {
+  padding: var(--spacer);
+  border-radius: var(--border-radius);
+  color: var(--body-bg-color);
+}
+
+.message-info {
+  background-color: var(--info-color);
+}
+
+.message-warning {
+  background-color: var(--warning-color);
+}
+
+.message-danger {
+  background-color: var(--danger-color);
+}
+
+/**
+ * Alignment
+ */
+
+.align-right {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  float: right;
+}
+
+.align-left {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  float: left;
+}
+
+.align-center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+figcaption.align-right {
+  text-align: right;
+}
+
+figcaption.align-left {
+  text-align: left;
+}
+
+figcaption.align-center {
+  text-align: center;
+}

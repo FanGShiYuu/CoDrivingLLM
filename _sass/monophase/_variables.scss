@@ -1,0 +1,54 @@
+$sm-screen: 35.5rem;
+$md-screen: 48rem;
+$lg-screen: 64rem;
+$xl-screen: 80rem;
+
+:root {
+  --spacer: 1rem;
+  --spacer-2: calc(var(--spacer) * 2);
+  --spacer-3: calc(var(--spacer) * 3);
+
+  // https://github.com/necolas/normalize.css/issues/665
+  --body-font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --body-font-size: 16px;
+  --body-line-height: 1.5;
+
+  --border-radius: .5em;
+
+  // https://qwtel.com/posts/software/the-monospaced-system-ui-css-font-stack/
+  --code-font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  /**
+   * Color
+   */
+  --body-bg-color: var(--oc-white);
+  --body-color: var(--oc-gray-9);
+  --code-bg-color: var(--oc-gray-1);
+  --heading-color: var(--oc-black);
+  --border-color: var(--oc-gray-4);
+  --link-color: var(--oc-blue-9);
+  --link-color-rgb: var(--oc-blue-9-rgb);
+  --link-hover-color: var(--oc-blue-7);
+  --info-color: var(--oc-green-9);
+  --warning-color: var(--oc-yellow-9);
+  --danger-color: var(--oc-red-9);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /**
+     * Color
+     */
+    --body-bg-color: var(--oc-gray-9);
+    --body-color: var(--oc-gray-4);
+    --code-bg-color: var(--oc-gray-7);
+    --heading-color: var(--oc-white);
+    --border-color: var(--oc-gray-7);
+    --link-color: var(--oc-cyan-4);
+    --link-color-rgb: var(--oc-cyan-4-rgb);
+    --link-hover-color: var(--oc-cyan-6);
+    --info-color: var(--oc-green-1);
+    --warning-color: var(--oc-yellow-1);
+    --danger-color: var(--oc-red-1);
+  }
+}
