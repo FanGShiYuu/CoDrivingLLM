@@ -34,7 +34,15 @@ Videos of other scenarios (highway, merge) can be found **[Here](https://github.
 ### Comparison with Memory Module
 Novice drivers accumulate experience through continuous driving practice, evaluate the effects of different behaviors, and learn from them to improve their driving skills. Drawing on this mechanism, a memory module is introduced to enable CAVs to learn from past experiences and utilize this knowledge to future interactions. We also use a video comparison to demonstrate the effectiveness of memory modules.
 
-| <video muted controls width=420> <source src="./src/case2-0shot.mp4"  type="video/mp4"> </video> <video muted controls width=420> <source src="./src/case2-2shot.mp4"  type="video/mp4"> </video> |
+<div style="text-align: center;">
+  <video muted controls width="420" style="margin-right: 10px;">
+    <source src="./src/case2-0shot.mp4" type="video/mp4">
+  </video>
+  <video muted controls width="420" style="margin-left: 10px;">
+    <source src="./src/case2-2shot.mp4" type="video/mp4">
+  </video>
+</div>
+
 
 The video on the left shows the vehicle in action without the memory module. At this point, the vehicle's late braking resulted in a rear-end collision. In the video on the right, in the case of a memory module, when the vehicle encounters a situation similar to the video on the left, it can absorb the previous error, and then avoid the collision, and finally achieve safe passage. 
 
