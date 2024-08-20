@@ -4,3 +4,9 @@ header_pages: "My Custom Title"
 url: "https://yournewurl.com"
 
 pages："a"
+
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "About"
+    url: "/about"
