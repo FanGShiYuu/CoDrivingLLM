@@ -1,3 +1,10 @@
 remote_theme: aterenin/minima-reboot
 
-title: "My Custom Title"
+header_pages:
+- about.md
+- posts.md
+- github.md
+
+footer_icons:
+- username: aterenin/minima-reboot/
+  url: https://github.com/aterenin/minima-reboot/
