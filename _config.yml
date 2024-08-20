@@ -1,16 +1,9 @@
 remote_theme: aterenin/minima-reboot
 
-header_pages: "My Custom Title"
+title: "My Custom Title"
 url: "https://yournewurl.com"
-
-pages："a"
 
 footer_icons:
 - username: aterenin/minima-reboot/
   url: https://github.com/aterenin/minima-reboot/
   
-nav:
-  - title: "Home"
-    url: "/"
-  - title: "About"
-    url: "/about"
