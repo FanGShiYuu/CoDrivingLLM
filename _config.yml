@@ -1,7 +1,6 @@
 remote_theme: aterenin/minima-reboot
 
-title: "My Custom Title"
-url: "https://yournewurl.com"
+title: "CoDrivingLLM"
 
 footer_icons:
 - username: Code
