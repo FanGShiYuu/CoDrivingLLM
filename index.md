@@ -1,6 +1,6 @@
 ## Towards Interactive and Learnable Cooperative Driving Automation: a Large Language Model-Driven Decision-making Framework
 
-[Shiyu Fang](https://fangshiyuu.github.io/)
+## [Shiyu Fang](https://fangshiyuu.github.io/)
 
 ## Abstract
 At present, Connected Autonomous Vehicles (CAVs) have begun to open road testing around the world, but their safety and efficiency performance in complex scenarios is still not satisfactory. Cooperative driving leverages the connectivity ability of CAVs to achieve synergies greater than the sum of their parts, making it a promising approach to improving CAV performance in complex scenarios. However, the lack of interaction and continuous learning ability limits current cooperative driving to single-scenario applications and specific Cooperative Driving Automation (CDA). To address these challenges, this paper proposes CoDrivingLLM, an interactive and learnable LLM-driven cooperative driving framework, to achieve all-scenario and all-CDA. First, since Large Language Models(LLMs) are not adept at handling mathematical calculations, an environment module is introduced to update vehicle positions based on semantic decisions, thus avoiding potential errors from direct LLM control of vehicle positions. Second, based on the four levels of CDA defined by the SAE J3216 standard, we propose a Chain-of-Thought (COT) based reasoning module that includes state perception, intent sharing, negotiation, and decision-making, enhancing the stability of LLMs in multi-step reasoning tasks. Centralized conflict resolution is then managed through a conflict coordinator in the reasoning process. Finally, by introducing a memory module and employing retrieval-augmented generation, CAVs are endowed with the ability to learn from their past experiences. We validate the proposed CoDrivingLLM through ablation experiments on the negotiation module, reasoning with different shots experience, and comparison with other cooperative driving methods.
@@ -17,7 +17,7 @@ LLMs possess strong comprehension and reasoning abilities, allowing them to use 
 ## Experiments and Analysis
 To verify whether the proposed CoDrivingLLM can effectively improve the interaction ability and learning ability of CAV, this section carries out verification from three aspects. Firstly, ablation experiments were conducted on the negotiation module in different scenarios. Second, we compared the performance of CoDrivingLLM in different scenarios under 0-shot, 2-shots and 5-shots experiences. Finally, we evaluated the safety and efficiency of CoDrivingLLM against other cooperative driving methods, including optimization-based, rule-based, and machine learning-based methods. **Here we focus on showing the operation of each experiment through video. Please refer to the full-text for details of the experiment results.**
 
-### Ablation Study on Negotiation
+#### Ablation Study on Negotiation
 Lack of interaction ability is an important reason for the current CAV's struggle on the open road. Cooperative driving, through the sharing of states and intentions, can provide additional information to help conflicting parties align their decision-making. To achieve this, we introduce a negotiation module into the reasoning process. By establishing an LLM-driven conflict coordinator, the traffic rules and scenario description are integrated to produce a suggested traffic sequence to assist the final decision, thus improving the interaction ability. To verify the effectiveness of the conflict coordinator in improving interaction, we select an example case to analyze how the negotiation function can improve safety.
 
 <div style="text-align: center;">
@@ -33,7 +33,7 @@ The video on the left shows the real-time vehicle state without the negotiation 
 
 Videos of other scenarios (highway, merge) can be found **[Here](https://github.com/FanGShiYuu/CoDrivingLLM)**, where ./without_negotiation folder represents CoDrivingLLM without a negotiation module.
 
-### Comparison with Memory Module
+#### Comparison with Memory Module
 Novice drivers accumulate experience through continuous driving practice, evaluate the effects of different behaviors, and learn from them to improve their driving skills. Drawing on this mechanism, a memory module is introduced to enable CAVs to learn from past experiences and utilize this knowledge to future interactions. We also use a video comparison to demonstrate the effectiveness of memory modules.
 
 <div style="text-align: center;">
