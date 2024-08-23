@@ -149,7 +149,7 @@ class LlmAgent_action_module():
             decision_cautions = self.pre_prompt.get_decision_cautions()
         # action_name = ACTIONS_ALL.get(action_id, "Unknown Action")
         # action_description = ACTIONS_DESCRIPTION.get(action_id, "No description available")
-        # past_memory = self.relative_memory(memory, current_scenario)  # with this line to active memory retrivel
+        # past_memory = self.relative_memory(memory, current_scenario)  # with this line to active memory retrivel, active line46 to build your own database before you output past memory
         past_memory = ''
 
         prompt = (f"{message_prefix}"
