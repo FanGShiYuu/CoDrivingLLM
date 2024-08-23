@@ -43,14 +43,13 @@ class LlmAgent_action_module():
             prompt_info = self.prompt_engineer(ego_veh, env.road, env, negotiation_results, conflicting_info)  # prompt engineer
             # print("prompt_info:", prompt_info)
             llm_action = self.send_to_chatgpt(ego_veh, prompt_info, negotiation_results, memory)
-            # self.memory_update(memory, prompt_info, llm_action)
+            # self.memory_update(memory, prompt_info, llm_action)  # active this line to restore new memory during interaction
             llm_actions.append(llm_action)
             print("llm_action:", llm_action, ego_veh, 'speed now:', ego_veh.speed)
         return llm_actions
 
     def get_scene_name(self, env):
         scene_name = env.spec.id
-        # 使用正则表达式提取 'merge'、'intersection' 或 'highway' 部分
         match = re.search(r'(merge|intersection|highway)', scene_name)
         simplified_scene_name = match.group(0) if match else 'unknown'
         return simplified_scene_name
@@ -150,7 +149,7 @@ class LlmAgent_action_module():
             decision_cautions = self.pre_prompt.get_decision_cautions()
         # action_name = ACTIONS_ALL.get(action_id, "Unknown Action")
         # action_description = ACTIONS_DESCRIPTION.get(action_id, "No description available")
-        # past_memory = self.relative_memory(memory, current_scenario)
+        # past_memory = self.relative_memory(memory, current_scenario)  # with this line to active memory retrivel
         past_memory = ''
 
         prompt = (f"{message_prefix}"
