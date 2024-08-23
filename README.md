@@ -44,7 +44,6 @@ severity of the conflict for each CAV final decision, features a centralized-dis
 * memory.py :
 stores all the functions required by the memory module, including the acquisition of similar memories and the storage of new memories.
 
-
 * prompt_llm.py: all prompts used to connect the traffic scenario, CAV and ChatGPT.
 Different scenarios may need different prompt, which needs to be revised and updated according
 to the scenario's meets.
@@ -59,8 +58,5 @@ intersection_env.py, merge_env_v1.py, and highway_env.py, respectively.
 
 #### videos&data 📂: 
 Video of vehicle operation and raw data of different cooperative driving method in each experiment.
-
-#### db folder 📂: 
-Store experience in various scenarios. It is used in decision-making to acquire past memories and avoid repeating mistakes.
 
 ### If you have any questions, feel free to contact us (2111219@tongji.edu.cn) 📧.
