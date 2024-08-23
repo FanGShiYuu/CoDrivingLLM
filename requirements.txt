@@ -1,0 +1,7 @@
+numpy==1.24.0
+pandas==1.3.5
+gym
+matplotlib
+opencv-python
+pygame
+openai==1.2.2
