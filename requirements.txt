@@ -7,10 +7,6 @@ pygame
 openai==1.2.2
 imageio
 openpyxl
-os
-re
-json
-shutil
 langchain==0.0.335
 dataclasses
 highway_env
