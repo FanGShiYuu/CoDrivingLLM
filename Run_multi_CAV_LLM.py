@@ -72,7 +72,7 @@ for i in range(100):
         negotiation_prompt, conflicting_info = llm_agent_conflict_resolver.llm_controller_run(env)
 
         # decision
-        llm_agent = LlmAgent_action_module(env)  # create llmagent  for highway and merge env (can change lane)
+        llm_agent = LlmAgent_action_module(env)  
         sce = llm_agent.retrun_sce()  # sce data
         llm_actions = llm_agent.llm_controller_run(env, negotiation_prompt, conflicting_info, env.controlled_vehicles, memory)  # negotiation results from upper layer and conflict info which stores distance speed
 
