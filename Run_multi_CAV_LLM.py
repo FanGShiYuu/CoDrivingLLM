@@ -56,8 +56,8 @@ env = gym.make('intersection-multi-agent-v0')
 
 
 for i in range(100):
-    video_path = './llm_controller/video/' + str(i) + '.mp4'  # 修改为您希望保存的路径和文件名
-    writer = imageio.get_writer(video_path, fps=30)  # 设置fps为您希望的帧率
+    video_path = './llm_controller/video/' + str(i) + '.mp4'  
+    writer = imageio.get_writer(video_path, fps=30) 
     file_name, workbook = open_excel(i)
     terminated = False
     t = 0
@@ -86,7 +86,7 @@ for i in range(100):
         env.render()
         print("llm_actions:", action)
         print("global_reward_llm:", global_reward)
-        # 获取当前画面并添加到视频中
+
         frame = env.render('rgb_array')
         writer.append_data(frame)
 
