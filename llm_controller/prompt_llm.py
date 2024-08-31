@@ -590,11 +590,11 @@ def check_safety_in_current_lane(toolModels, lane_cars_id, availabel_lane, ego_v
 
     if current_lane_car_id:
         # Check for conflicts if there is a car in the current lane
-        if leading_or_rearing == "leadingCar":  # 如果ego前面有车
+        if leading_or_rearing == "leadingCar":  # if there is leading vehicle for ego
             safety_analysis['acceleration_conflict'] = acceleration_tool.inference(current_lane_car_id, ego_veh)
         if leading_or_rearing == "rearingCar" or leading_or_rearing == "leadingCar":
             safety_analysis['keep_speed_conflict'] = keep_speed_tool.inference(current_lane_car_id, ego_veh)
-        if leading_or_rearing == "rearingCar":  # 如果ego后面有车
+        if leading_or_rearing == "rearingCar":  # if there is rearing vehicle for ego
             safety_analysis['deceleration_conflict'] = deceleration_tool.inference(current_lane_car_id, ego_veh)
 
     return safety_analysis
@@ -621,7 +621,6 @@ def check_safety_with_conflict_vehicles(ego_veh, negotiation_results, conflictin
     most_dangerous_info = {'delta ttcp': None, 'distance to conflict': None, 'speed': None, 'distance to conflict (others)': None, 'speed (others)': None}
 
     pattern = re.compile(r"- You have conflict with (MDPVehicle #[0-9]+|IDMVehicle #[0-9]+). It is suggested that you should passes second.")  # TODO: must same pattern as negotiation_results
-    # 提取出匹配的车辆
     vehicles_pass_second = pattern.findall(negotiation_results)  # vehicles_pass_second = [MDPVehicle #800] without pos
     speed_limit = env.road.network.get_lane(ego_veh.lane_index).speed_limit
     dangerous_level = 0
