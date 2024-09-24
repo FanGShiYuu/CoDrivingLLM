@@ -63,7 +63,7 @@ Video of vehicle operation and raw data of different cooperative driving method 
 
 #### Citation
 
-Our paper has been pre-printed! If you find our work helpful, please consider citing us using the following reference:
+Our paper has been pre-printed! If you find our work helpful, please consider citing us using the following reference 😊:
 
 ```bibtex
 @misc{fang2024interactivelearnablecooperativedriving,
@@ -75,5 +75,4 @@ Our paper has been pre-printed! If you find our work helpful, please consider ci
       primaryClass={cs.RO},
       url={https://arxiv.org/abs/2409.12812}, 
 }
-
 
