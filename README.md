@@ -65,6 +65,7 @@ Video of vehicle operation and raw data of different cooperative driving method 
 
 Our paper has been pre-printed! If you find our work helpful, please consider citing us using the following reference:
 
+```bibtex
 @misc{fang2024interactivelearnablecooperativedriving,
       title={Towards Interactive and Learnable Cooperative Driving Automation: a Large Language Model-Driven Decision-Making Framework}, 
       author={Shiyu Fang and Jiaqi Liu and Mingyu Ding and Yiming Cui and Chen Lv and Peng Hang and Jian Sun},
