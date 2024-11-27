@@ -19,43 +19,43 @@ class DrivingMemory:
         print("==========Loaded ", db_path, " Memory, Now the database has ", len(self.scenario_memory._collection.get(include=['embeddings'])['embeddings']), " items.==========")
 
 
-    # def retrieveMemory(self, query_scenario, top_k=5):
-    #     """Retrieve the most similar scenarios from memory."""
-    #     similarity_results = self.scenario_memory.similarity_search_with_score(query_scenario, k=top_k)
-    #     fewshot_results = []
-    #     for idx in range(0, len(similarity_results)):
-    #         fewshot_results.append(similarity_results[idx][0].metadata)
-    #     return fewshot_results
-
     def retrieveMemory(self, query_scenario, top_k=5):
-        """Retrieve the most similar scenarios from memory, limited to a certain number of items."""
-        # Get the first 'limit' embeddings
-        embeddings_data = self.scenario_memory._collection.get(include=['embeddings', 'documents', 'metadatas'])
-        limited_embeddings = embeddings_data['embeddings']
-        limited_documents = embeddings_data['documents']
-        limited_metadatas = embeddings_data['metadatas']
-
-        # Create a temporary Chroma collection with limited items
-        temp_memory = Chroma(
-            embedding_function=self.embedding,
-            persist_directory=None  # Temporary in-memory store
-        )
-
-        # Add the limited data to this temporary collection
-        temp_memory._collection.add(
-            embeddings=limited_embeddings,
-            documents=limited_documents,
-            metadatas=limited_metadatas
-        )
-
-        # Perform the similarity search on the limited data
-        similarity_results = temp_memory.similarity_search_with_score(query_scenario, k=top_k)
-
+        """Retrieve the most similar scenarios from memory."""
+        similarity_results = self.scenario_memory.similarity_search_with_score(query_scenario, k=top_k)
         fewshot_results = []
         for idx in range(0, len(similarity_results)):
             fewshot_results.append(similarity_results[idx][0].metadata)
-
         return fewshot_results
+
+    # def retrieveMemory(self, query_scenario, top_k=5):
+    #     """Retrieve the most similar scenarios from memory, limited to a certain number of items."""
+    #     # Get the first 'limit' embeddings
+    #     embeddings_data = self.scenario_memory._collection.get(include=['embeddings', 'documents', 'metadatas'])
+    #     limited_embeddings = embeddings_data['embeddings']
+    #     limited_documents = embeddings_data['documents']
+    #     limited_metadatas = embeddings_data['metadatas']
+
+    #     # Create a temporary Chroma collection with limited items
+    #     temp_memory = Chroma(
+    #         embedding_function=self.embedding,
+    #         persist_directory=None  # Temporary in-memory store
+    #     )
+
+    #     # Add the limited data to this temporary collection
+    #     temp_memory._collection.add(
+    #         embeddings=limited_embeddings,
+    #         documents=limited_documents,
+    #         metadatas=limited_metadatas
+    #     )
+
+    #     # Perform the similarity search on the limited data
+    #     similarity_results = temp_memory.similarity_search_with_score(query_scenario, k=top_k)
+
+    #     fewshot_results = []
+    #     for idx in range(0, len(similarity_results)):
+    #         fewshot_results.append(similarity_results[idx][0].metadata)
+
+    #     return fewshot_results
 
     def addMemory(self, sce_descrip, human_question, negotiation, action, comments):
         """Add a new scenario to memory."""
