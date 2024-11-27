@@ -11,5 +11,5 @@ openpyxl
 highway-env
 chromadb==0.4.15
 sentence-transformers==3.0.1
-
+tiktoken
 
