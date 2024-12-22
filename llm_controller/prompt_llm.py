@@ -316,7 +316,7 @@ class isAccelerationConflictWithCar:
 
     @prompts(name='Is Acceleration Conflict With Car',
              description="""useful when you want to know whether acceleration is safe with a specific car, ONLY when your decision is accelerate. The input to this tool should be a string, representing the id of the car you want to check.""")
-    def inference(self, vid: str, ego_veh) -> str:
+    def inference(self, vid: str, ego_veh, env) -> str:
 
         if vid not in self.sce.road_info.vehicles:
             return "Your input is not a valid vehicle id, make sure you use `Get Lane Involved Car` tool first!"
@@ -326,8 +326,6 @@ class isAccelerationConflictWithCar:
         # ego = self.sce.vehicles['ego']
         veh = vid
         ego =  ego_veh
-        if veh.lane_index != ego.lane_index:
-            return f'{vid} is not in the same lane with ego, please call `Get Lane Involved Car` and rethink your input.'
         if veh.lane_index == ego.lane_index:
             ego_destination = ego.destination
             ego_distance_to_destination = np.sqrt((ego.position[0] - ego_destination[0]) ** 2 + (ego_veh.position[1] - ego_destination[1]) ** 2)
@@ -336,11 +334,11 @@ class isAccelerationConflictWithCar:
                 relativeSpeed = ego.speed + self.acceleration - veh.speed
                 distance = ego_distance_to_destination - veh_distance_to_destination - self.VEHICLE_LENGTH * 2
                 ttc = distance / relativeSpeed
-                if ttc > 20:
+                if ttc > 10 or ttc < -2:
                     return f"acceleration is safe with {vid}"
-                elif 20 >= ttc > 10:
-                    return f"acceleration may not safe with {vid}, should be careful if you want to accelerate"
                 elif 10 >= ttc > 5:
+                    return f"acceleration may not safe with {vid}, should be careful if you want to accelerate"
+                elif 5 >= ttc > 3:
                     return f'acceleration will cause danger, you can not accelerate'
                 else:
                     return f'acceleration will cause serious danger, must decelerate.'
@@ -381,11 +379,13 @@ class isKeepSpeedConflictWithCar:
                 relativeSpeed = ego.speed - veh.speed
                 distance = ego_distance_to_destination - veh_distance_to_destination - self.VEHICLE_LENGTH * 2
                 ttc = distance / relativeSpeed
-                if ttc > 20:
+                if ttc > 20 or ttc < -3:
                     return f"keep lane with current speed is safe with {vid}"
-                elif 20 >= ttc > 10:
+                elif -3 < ttc <= 0:
                     return f"keep lane with current speed may not safe with {vid}, should consider decelerate"
-                elif 10 >= ttc > 5:
+                elif 20 >= ttc > 5:
+                    return f"keep lane with current speed may not safe with {vid}, should consider decelerate"
+                elif 5 >= ttc > 3:
                     return f'keep lane with current speed will cause danger, you should consider decelerate'
                 else:
                     return f'keep lane with current speed will cause serious danger, must decelerate.'
@@ -417,8 +417,6 @@ class isDecelerationSafe:
         # ego = self.sce.vehicles['ego']
         veh = vid
         ego = ego_veh
-        if veh.lane_index != ego.lane_index:
-            return f'{vid} is not in the same lane with ego, please call `Get Lane Involved Car` and rethink your input.'
         if veh.lane_index == ego.lane_index:
             ego_destination = ego.destination
             ego_distance_to_destination = np.sqrt((ego.position[0] - ego_destination[0]) ** 2 + (ego_veh.position[1] - ego_destination[1]) ** 2)
@@ -427,11 +425,13 @@ class isDecelerationSafe:
                 relativeSpeed = veh.speed - (ego.speed - self.deceleration)
                 distance = veh_distance_to_destination - ego_distance_to_destination - self.VEHICLE_LENGTH
                 ttc = distance / relativeSpeed
-                if ttc > 20:
+                if ttc > 20 or ttc < -3:
                     return f"deceleration with current speed is safe with {vid}"
-                elif 20 >= ttc > 10:
+                elif -3 < ttc <= 0:
                     return f"deceleration with current speed may not safe with {vid}"
-                elif 10 >= ttc > 5:
+                elif 20 >= ttc > 5:
+                    return f"deceleration with current speed may not safe with {vid}"
+                elif 5 >= ttc > 1:
                     return f'deceleratione with current speed will cause danger, if you have no other choice, try not to decelerate so fast as much as possible'
                 else:
                     return f"deceleration with current speed may be conflict with {vid}, you should maintain speed or accelerate"
