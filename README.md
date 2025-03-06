@@ -3,6 +3,10 @@
 [Department of Traffic Engineering and Key Laboratory of Road and Traffic Engineering, Ministry of Education, Tongji University](https://tops.tongji.edu.cn/)  
 [[Project web](https://fangshiyuu.github.io/CoDrivingLLM/)]
 
+### Updates
+* 2025/03/06: We have further enabled bidirectional interaction between autonomous driving and human driving through a localized large language model (LLM). You can express your intentions to the LLM-driven autonomous vehicle via microphone voice input—go ahead and see how it responds! [[Code](https://github.com/FanGShiYuu/Actor-Reasoner)]
+
+
 ## Getting started 🚀
 Install the dependent package
 ```shell
