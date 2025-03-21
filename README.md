@@ -17,7 +17,7 @@ Run CoDrivingLLM
 ```shell
 python Run_multi_CAV_LLM.py
 ```
-remember to add your API key first 
+remember to add your API key first
 
 ## Overview 🔍
 ### Repo description
