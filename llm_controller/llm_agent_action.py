@@ -124,10 +124,17 @@ class LlmAgent_action_module():
 
     def memory_update(self, memory, prompt_info, llm_action):
         human_question = str(None)
-        negotiation = 'Ego should pass second'  # memory store the dangerous info (which negotiation is ego to yield) for ego vehicle
+        negotiation = str(None)  # memory store the dangerous info (which negotiation is ego to yield) for ego vehicle
         action = str(llm_action)
-        comments = 'Cause more danger' if llm_action == 'FASTER' else 'Safe now but should pay attention to avoid future danger'
-        memory.addMemory(prompt_info, human_question, negotiation, action, comments)
+        saved_info = prompt_info.strip().split('\n')[-1]
+        if saved_info != ' Conflict info is empty':
+            relation = re.findall(r'_(.*?)_', saved_info)
+            comments = generate_comment(relation[0], llm_action[0])
+            print(relation[0], llm_action[0], comments)
+        else:
+            comments = 'recommended to FASTER'
+        memory.addMemory(str(saved_info), human_question, negotiation, action, comments)
+        print(' New mem has been added ...')
 
 
     def send_to_chatgpt(self, ego_veh, current_scenario, negotiation_results, memory):
