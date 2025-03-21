@@ -621,6 +621,7 @@ def check_safety_with_conflict_vehicles(ego_veh, negotiation_results, conflictin
     most_dangerous_info = {'delta ttcp': None, 'distance to conflict': None, 'speed': None, 'distance to conflict (others)': None, 'speed (others)': None}
 
     pattern = re.compile(r"- You have conflict with (MDPVehicle #[0-9]+|IDMVehicle #[0-9]+). It is suggested that you should passes second.")  # TODO: must same pattern as negotiation_results
+    # 提取出匹配的车辆
     vehicles_pass_second = pattern.findall(negotiation_results)  # vehicles_pass_second = [MDPVehicle #800] without pos
     speed_limit = env.road.network.get_lane(ego_veh.lane_index).speed_limit
     dangerous_level = 0
@@ -630,28 +631,31 @@ def check_safety_with_conflict_vehicles(ego_veh, negotiation_results, conflictin
                     (conflict_group['vehicle_j'] == ego_veh and str(conflict_group['vehicle_i']).split(':')[0].strip() == vehicle):
                 ttcp_i = cal_ttcp(speed_limit, conflict_group['vehicle_i distance to conflict'], conflict_group['vehicle_i speed'])
                 ttcp_j = cal_ttcp(speed_limit, conflict_group['vehicle_j distance to conflict'], conflict_group['vehicle_j speed'])
-                ttcp = abs(ttcp_j - ttcp_i)
-                if ttcp > 8:
+                ttcp = ttcp_j - ttcp_i
+                if abs(ttcp) > 8:
                     level = 0
-                elif 8 >= ttcp > 5:
+                elif 8 >= abs(ttcp) > 5:
                     level = 1
-                elif 5 >= ttcp > 2:
+                elif 5 >= abs(ttcp) > 2:
                     level = 2
                 else:
                     level = 3
                 if level > dangerous_level:
                     dangerous_level = level
-                    most_dangerous_info['delta ttcp'] = ttcp
                     if conflict_group['vehicle_i'] == ego_veh:
+                        most_dangerous_info['delta ttcp'] = ttcp_j - ttcp_i
                         most_dangerous_info['distance to conflict'] = conflict_group['vehicle_i distance to conflict']
                         most_dangerous_info['speed'] = conflict_group['vehicle_i speed']
                         most_dangerous_info['distance to conflict (others)'] = conflict_group['vehicle_i distance to conflict']
                         most_dangerous_info['speed (others)'] = conflict_group['vehicle_j speed']
+                        most_dangerous_info['delta speed'] = round(conflict_group['vehicle_i speed'] - conflict_group['vehicle_j speed'], 1  )
                     else:
+                        most_dangerous_info['delta ttcp'] = ttcp_i - ttcp_j
                         most_dangerous_info['distance to conflict'] = conflict_group['vehicle_j distance to conflict']
                         most_dangerous_info['speed'] = conflict_group['vehicle_j speed']
                         most_dangerous_info['distance to conflict (others)'] = conflict_group['vehicle_i distance to conflict']
                         most_dangerous_info['speed (others)'] = conflict_group['vehicle_i speed']
+                        most_dangerous_info['delta speed'] = round(conflict_group['vehicle_j speed'] - conflict_group['vehicle_i speed'], 1)
 
     if dangerous_level == 0:
         safety_analysis['acceleration_conflict'] = f'acceleration is safe'
