@@ -663,6 +663,21 @@ def check_safety_with_conflict_vehicles(ego_veh, negotiation_results, conflictin
         safety_analysis['acceleration_conflict'] = f'acceleration will cause serious danger, must decelerate.'  # You output decision have to be SLOWER (note that it is in capital letters)!!!
     return safety_analysis, most_dangerous_info
 
+def generate_comment(relation, llm_action):
+    if relation == 'much close' or relation == 'slight close':
+        if llm_action == 1 or llm_action == 3:
+            return 'safe and good for efficiency'
+        else:
+            return 'not efficiency, consider FASTER next time'
+    elif relation == 'equal close':
+        return 'might not safe, you should be careful and check'
+    else:
+        if llm_action == 1:
+            return 'it is not safety to accelerate, don not accelerate next time'
+        elif llm_action == 3:
+            return 'may not safe if your speed is high'
+        else:
+            return 'it is safe, good for you'
 
 def format_training_info(available_actions_msg, lanes_info_msg, all_lane_info_msg, lanes_adjacent_info, cars_near_lane, lane_change_safety, current_lane_safety, conflict_safety, most_dangerous_info):  # msg0, msg1, msg2, availabel_lane, lane_cars_id, safety_assessment, safety_msg
     formatted_message = ""
@@ -705,9 +720,18 @@ def format_training_info(available_actions_msg, lanes_info_msg, all_lane_info_ms
 
     # Most dangerous conflict info which same pattern as memory
     if most_dangerous_info['delta ttcp'] is not None:
-        formatted_message += f"\n Currently, the most dangerous collision information with the ego vehicle is as follows: \n"
-        formatted_message += f"The time to collision is {most_dangerous_info['delta ttcp']}s, ego vehicle's the distance to the collision point is {most_dangerous_info['distance to conflict']} m, " \
-                             f"and the current speed of the ego vehicle is {most_dangerous_info['speed']}, the distance to the collision point of conflict vehicle is {most_dangerous_info['distance to conflict (others)']} m, its speed is {most_dangerous_info['speed (others)']}\n"
+        if most_dangerous_info['delta ttcp'] >= 5:
+            relation = 'much close'
+        elif 5 > most_dangerous_info['delta ttcp'] >= 2:
+            relation = 'slight close'
+        elif 2 > most_dangerous_info['delta ttcp'] >= -2:
+            relation = 'equal close'
+        elif -2 > most_dangerous_info['delta ttcp'] >= -5:
+            relation = 'slight further'
+        else:
+            relation = 'much further'
+        formatted_message += f"\n Currently, the most dangerous collision information with the ego vehicle is as follows:"
+        formatted_message += f"Ego is _{relation}_ to conflict point than other vehicles considering current speed and distance, Ego vehicle speed minus other vehicle is {most_dangerous_info['delta speed']}"
     else:
         formatted_message += f"\n Currently, ego vehicle do not have conflict \n"
         formatted_message += f"\n Conflict info is empty \n"
