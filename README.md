@@ -4,6 +4,7 @@
 [[Project web](https://fangshiyuu.github.io/CoDrivingLLM/)]
 
 ### Updates
+* 2025/03/21: This work has been published in IEEE Transactions on Vehicular Technology. If you find it helpful, please consider citing our [[work](https://ieeexplore.ieee.org/document/10933798)].
 * 2025/03/06: We have further enabled bidirectional interaction between autonomous driving and human driving through a localized large language model (LLM). You can express your intentions to the LLM-driven autonomous vehicle via microphone voice input—go ahead and see how it responds! [[Code](https://github.com/FanGShiYuu/Actor-Reasoner)]
 
 
@@ -70,13 +71,14 @@ Video of vehicle operation and raw data of different cooperative driving method 
 Our paper has been pre-printed! If you find our work helpful, please consider citing us using the following reference 😊:
 
 ```bibtex
-@misc{fang2024interactivelearnablecooperativedriving,
-      title={Towards Interactive and Learnable Cooperative Driving Automation: a Large Language Model-Driven Decision-Making Framework}, 
-      author={Shiyu Fang and Jiaqi Liu and Mingyu Ding and Yiming Cui and Chen Lv and Peng Hang and Jian Sun},
-      year={2024},
-      eprint={2409.12812},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2409.12812}, 
-}
+@ARTICLE{10933798,
+  author={Fang, Shiyu and Liu, Jiaqi and Ding, Mingyu and Cui, Yiming and Lv, Chen and Hang, Peng and Sun, Jian},
+  journal={IEEE Transactions on Vehicular Technology}, 
+  title={Towards Interactive and Learnable Cooperative Driving Automation: a Large Language Model-Driven Decision-Making Framework}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-12},
+  keywords={Cognition;Autonomous vehicles;Decision making;Aerospace electronics;Safety;Memory modules;Sun;Space vehicles;Semantics;Roads;connected autonomous vehicles;cooperative driving automation;large language model;conflict negotiation;retrieval augment generation},
+  doi={10.1109/TVT.2025.3552922}}
 
