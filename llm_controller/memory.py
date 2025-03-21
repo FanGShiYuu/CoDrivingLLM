@@ -6,6 +6,8 @@ import os
 
 api_key = 'your key here'
 os.environ["OPENAI_API_KEY"] = api_key
+# os.environ["http_proxy"] = 'http://127.0.0.1:7890'  # region gpt is not directly available
+# os.environ["https_proxy"] = 'http://127.0.0.1:7890'
 
 class DrivingMemory:
     def __init__(self, env) -> None:
