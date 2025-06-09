@@ -64,7 +64,7 @@ intersection_env.py, merge_env_v1.py, and highway_env.py, respectively.
 #### videos&data 📂: 
 Video of vehicle operation and raw data of different cooperative driving method in each experiment.
 
-### If you have any questions, feel free to contact us (2111219@tongji.edu.cn) 📧.
+### If you have any questions, feel free to contact us (fangshiyu@tongji.edu.cn) 📧.
 
 #### Citation
 
