@@ -128,6 +128,8 @@ class LlmAgent_negotiation_module():
         ref_y_list = []
         # print(vehicle)
         # print(vehicle.route)
+        if not hasattr(vehicle, 'route') or vehicle.route is None:
+            return []
         for lane_index in vehicle.route:
             x, y = self.get_lane_xy(env, lane_index)
             ref_x_list = np.hstack((ref_x_list, x))
